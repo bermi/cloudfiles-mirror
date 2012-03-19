@@ -13,6 +13,7 @@ mirror = CloudfilesMirror({
   cdnEnabled: true,
   monitor: true,
   pushOnBoot: true,
+  verbose: true,
   servicenet: false // only when running from the same datacenter
 });
 
