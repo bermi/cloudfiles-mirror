@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+  _ = require("underscore"),
+  cluster = require('cluster'),
+  path = require("path"),
+  fs = require("fs"),
+  cli_path = path.join(__dirname, '..', 'lib', 'cloudfiles-mirror', 'cli.js'),
+  loadConfig,
+  config;
+
+program
+  .version('0.1.0')
+  .option('-c, --config [value]', 'Configuration file', '.cloudfiles-mirror.json')
+  .option('-l --local [value]', 'Local directory to mirror', process.cwd())
+  .option('-r --remote [value]', "Remote container", path.basename(process.cwd()))
+  .option('-b --base [value]', "Remote base directory", "")
+  .option('-u --user [value]', "Rackspace username", "")
+  .option('-k --key [value]', "Rackspace API key", "")
+  .option('--cdn', "Enable CDN support when creating the container")
+  .option('-m --monitor', 'Enable monitor the local directory')
+  .option('-s --servicenet', 'Enable ServiceNet (unmetered, double throughput) Only within Rackpace servers')
+  .option('-w --workers <n>', 'Number of symultaneous parallel workers interacting with the Cloud Servers API', 20)
+  .option('--sync_all', 'Pushes all local files on the first run.')
+  .parse(process.argv);
+
+loadConfig = function () {
+  var defaults = {
+    localPath: program.local,
+    remoteBase: program.base,
+    container: program.remote,
+    auth : {
+      username: program.user,
+      apiKey: program.key
+    },
+    cdnEnabled: program.cdn || false,
+    monitor: program.monitor || false,
+    pushOnBoot: program.sync_all || false,
+    servicenet: program.servicenet || false
+  },
+  config = {},
+  configFile = program.config;
+  if (configFile) {
+    try {
+      stats = fs.statSync(configFile),
+      config = JSON.parse(fs.readFileSync(configFile).toString());
+    } catch (e) {
+      throw e;
+    }
+  }
+  config = _.defaults(config, defaults);
+  return config;
+};
+
+config = loadConfig();
+
+if (program.monitor) {
+
+  // Node 0.4.x
+  try {
+    var proc = cluster()
+      .set('workers', 1)
+      .use(cluster.reload(cli_path))
+      .start();
+
+    if (!proc.isWorker) {
+      return;
+    }
+
+  // Node 0.6.x
+  } catch (e) {
+    if (cluster.isMaster) {
+      cluster.fork();
+      cluster.on('death', function(worker) {
+        cluster.fork();
+      });
+      return;
+    }
+  }
+}
+
+(require(cli_path))(config);

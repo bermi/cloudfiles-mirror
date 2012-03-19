@@ -1,0 +1,35 @@
+{
+  "author": "Bermi Ferrer <bermi@bermilabs.com> (http://bermi.org)",
+  "name": "cloudfiles-mirror",
+  "description": "Mirrors local files to a Cloud Files account",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bermi/cloudfiles-mirror",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bermi/cloudfiles-mirror.git"
+  },
+  "main": "./lib/cloudfiles-mirror",
+  "scripts": {
+    "test": "vows test/*-test.js --spec"
+  },
+  "dependencies": {
+    "cloudfiles": "0.3.x",
+    "mime": "1.2.x",
+    "walker": "1.0.x",
+    "eventemitter2": "0.4.x",
+    "pkginfo": "0.2.x",
+    "chain-gang": "1.0.x",
+    "watch": "0.5.x",
+    "commander": "0.5.x",
+    "cluster": "0.7.x",
+    "colors": "0.6.x"
+  },
+  "bin": "./bin/cloudfiles-mirror",
+  "devDependencies": {
+    "vows": "0.6.x"
+  },
+  "optionalDependencies": {},
+  "engines": { 
+    "node": ">=0.4" 
+  }
+}
