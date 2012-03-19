@@ -23,6 +23,7 @@ program
   .option('-w --workers <n>', 'Number of symultaneous parallel workers interacting with the Cloud Servers API', 20)
   .option('--show_config', 'Show current configuration and exits')
   .option('--sync_all', 'Pushes all local files on the first run.')
+  .option('--tmp [value]', 'Working directory base path.', (process.env['TMPDIR'] || process.env['TMP'] || process.env['TEMP'] || '/tmp/'))
   .parse(process.argv);
 
 loadConfig = function () {
@@ -30,7 +31,7 @@ loadConfig = function () {
     localPath: program.local,
     remoteBase: program.base,
     container: program.remote,
-    auth : {
+    auth: {
       username: program.user,
       apiKey: program.key
     },
@@ -47,7 +48,15 @@ loadConfig = function () {
       config = JSON.parse(fs.readFileSync(configFile).toString());
     } catch (e) { }
   }
+
+  defaults.cache = {
+    cachePath: program.tmp
+      + ".cache-cloudfiles-mirror"
+      + ((config && config.auth && config.auth.username) || '')
+  };
+
   config = _.defaults(config, defaults);
+
   return config;
 };
 
