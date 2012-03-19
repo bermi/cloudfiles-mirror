@@ -121,6 +121,7 @@ You can define new mime types with
 
 ## Roadmap
 
+1. Enable verbose output.
 1. Compare local and remote files before pushing them.
 1. Enable deleting files not found on source.
 1. Pre-processor support for optimizing or compiling assets.
@@ -150,4 +151,4 @@ Once you have valid Rackspace credentials you can run tests with [vows][2]:
 [0]: http://docs.rackspacecloud.com/files/api/cf-devguide-latest.pdf
 [1]: https://github.com/nodejitsu/node-cloudfiles
 [2]: http://vowsjs.org
-[3]: http://www.rackspacecloud.com/1469-0-3-13.html
+[3]: http://www.rackspacecloud.com/3066-0-3-13.html
