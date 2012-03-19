@@ -21,6 +21,7 @@ program
   .option('-m --monitor', 'Enable monitor the local directory')
   .option('-s --servicenet', 'Enable ServiceNet (unmetered, double throughput) Only within Rackpace servers')
   .option('-w --workers <n>', 'Number of symultaneous parallel workers interacting with the Cloud Servers API', 20)
+  .option('--show_config', 'Show current configuration and exits')
   .option('--sync_all', 'Pushes all local files on the first run.')
   .parse(process.argv);
 
@@ -44,15 +45,18 @@ loadConfig = function () {
     try {
       stats = fs.statSync(configFile),
       config = JSON.parse(fs.readFileSync(configFile).toString());
-    } catch (e) {
-      throw e;
-    }
+    } catch (e) { }
   }
   config = _.defaults(config, defaults);
   return config;
 };
 
 config = loadConfig();
+
+if (program.show_config) {
+  console.log(config);
+  process.exit(0);
+}
 
 if (program.monitor) {
 

@@ -22,19 +22,20 @@ Utility for keeping directories in sync with Rackspace Cloud Files
 
       Options:
 
-        -h, --help            output usage information
-        -V, --version         output the version number
-        -c, --config [value]  Configuration file
-        -l --local [value]    Local directory to mirror
-        -r --remote [value]   Remote container
-        -b --base [value]     Remote base directory
-        -u --user [value]     Rackspace username
-        -k --key [value]      Rackspace API key
-        --cdn                 Enable CDN support when creating the container
-        -m --monitor          Enable monitor the local directory
-        -s --servicenet       Enable ServiceNet (unmetered, double throughput) Only within Rackpace servers
-        -w --workers <n>      Number of symultaneous parallel workers interacting with the Cloud Servers API
-        --sync_all            Pushes all local files on the first run.
+      -h, --help            output usage information
+      -V, --version         output the version number
+      -c, --config [value]  Configuration file
+      -l --local [value]    Local directory to mirror
+      -r --remote [value]   Remote container
+      -b --base [value]     Remote base directory
+      -u --user [value]     Rackspace username
+      -k --key [value]      Rackspace API key
+      --cdn                 Enable CDN support when creating the container
+      -m --monitor          Enable monitor the local directory
+      -s --servicenet       Enable ServiceNet (unmetered, double throughput) Only within Rackpace servers
+      -w --workers <n>      Number of symultaneous parallel workers interacting with the Cloud Servers API
+      --show_config         Show current configuration and exits
+      --sync_all            Pushes all local files on the first run.
 
 
 
