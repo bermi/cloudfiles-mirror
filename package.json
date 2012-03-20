@@ -2,7 +2,7 @@
   "author": "Bermi Ferrer <bermi@bermilabs.com> (http://bermi.org)",
   "name": "cloudfiles-mirror",
   "description": "Mirrors local files to a Cloud Files account",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://github.com/bermi/cloudfiles-mirror",
   "repository": {
     "type": "git",
