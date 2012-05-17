@@ -10,7 +10,7 @@ var program = require('commander'),
   config;
 
 program
-  .version('0.1.6')
+  .version('0.1.7')
   .option('-c, --config [value]', 'Configuration file', '.cloudfiles-mirror.json')
   .option('-l --local [value]', 'Local directory to mirror', process.cwd())
   .option('-r --remote [value]', "Remote container", path.basename(process.cwd()))
