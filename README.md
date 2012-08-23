@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/bermi/cloudfiles-mirror.png)](http://travis-ci.org/bermi/cloudfiles-mirror)
 # cloudfiles-mirror
 
 Utility for keeping directories in sync with Rackspace Cloud Files
