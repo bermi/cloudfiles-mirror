@@ -95,6 +95,12 @@ Once a cloudfiles-mirror instance is created, you can listen for these events:
     mirror.on("local.file.created", function (file, mime, extension, stats) {});
     mirror.on("local.file.changed", function (file, mime, extension, stats) {});
     mirror.on("local.file.removed", function (file, mime, extension, stats) {});
+
+    // End event triggered when all files have been synced. This is only
+    // trigged if monitoring is not enabled.
+    mirror.on("end", function () {
+        console.log("Sync complete");
+    });
 ```
 
 
