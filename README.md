@@ -61,6 +61,10 @@ Create a mirror instance
       cdnEnabled: true,
       monitor: false,
       pushOnBoot: false,
+      // Add headers to files matching regular expressions
+      headers: {
+        "*\.woff": ['Access-Control-Allow-Origin: *']
+      },
       servicenet: false // only when running from the same datacenter
     });
 ```
@@ -102,7 +106,6 @@ Once a cloudfiles-mirror instance is created, you can listen for these events:
         console.log("Sync complete");
     });
 ```
-
 
 #### API Methods
 

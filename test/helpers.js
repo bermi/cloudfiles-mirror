@@ -7,7 +7,7 @@ var util = require('util'),
     testConfig,
     mirror;
 
-helpers.loadConfig = function () {
+helpers.loadConfig = function (testOptions) {
   try {
     var defaults = {
         localPath: path.join(__dirname, 'fixtures', 'source_files'),
@@ -25,6 +25,7 @@ helpers.loadConfig = function () {
       stats = fs.statSync(configFile),
       config = JSON.parse(fs.readFileSync(configFile).toString());
       config = _.defaults(config, defaults);
+      if (testOptions) config = _.extend(config, testOptions);
 
     if (config.auth.username === 'test-username'
         || config.auth.apiKey === 'test-apiKey') {
@@ -42,10 +43,9 @@ helpers.loadConfig = function () {
   }
 };
 
-helpers.createMirror = function () {
-  if (!testConfig) {
-    helpers.loadConfig();
-  }
+helpers.createMirror = function (options) {
+
+  helpers.loadConfig(options);
   
   if (!mirror) {
     mirror = CloudfilesMirror(testConfig);
